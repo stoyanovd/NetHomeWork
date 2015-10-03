@@ -25,6 +25,7 @@ class ConnectsKeeper:
         self.to_print = queue.Queue()
         self.to_add = queue.Queue()
         self.__saved = dict()
+        self.incorrect = 0
 
     def add(self, connect_pack):
         connect_pack.lost = 0
@@ -39,4 +40,4 @@ class ConnectsKeeper:
 
     def status(self):
         return "---  Status  ---\n" + "\n".join(map(str, self.__saved.values())) + \
-               "\n----------------\n"
+               "\n--- Incorrect get: " + str(self.incorrect) + "\n----------------\n"

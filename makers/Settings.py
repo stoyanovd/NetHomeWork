@@ -3,9 +3,13 @@ class Settings:
     TIME_PAUSE_SENDING = 5
     TIME_PAUSE_CHECKING = 5
 
+    TIME_PAUSE_SPAM = 0.1
+
     LOST_LIMIT = 5
 
     MAC_BYTEORDER = 'big'
     DATA_BYTEORDER = 'big'
 
     TIMESTAMP_LENGTH = 4
+
+    SPAM_PACK_SIZE = 1000

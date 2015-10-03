@@ -12,7 +12,15 @@ def client_main(ck):
 
         mac = int.from_bytes(data[0:6], byteorder=Settings.MAC_BYTEORDER)
         k = int.from_bytes(data[6:7], byteorder='little', signed=True)
-        name = data[7:7 + k].decode('utf-8')
+        if k <= 0 or len(data) < 7 + k + Settings.TIMESTAMP_LENGTH:
+            ck.incorrect += 1
+            continue
+        try:
+            name = data[7:7 + k].decode('utf-8')
+        except UnicodeDecodeError:
+            ck.incorrect += 1
+            continue
+
         t = int.from_bytes(data[7 + k:7 + k + Settings.TIMESTAMP_LENGTH], byteorder=Settings.DATA_BYTEORDER)
 
         c = ConnectPack(mac, name)
